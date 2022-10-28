@@ -1,7 +1,7 @@
-const User = require('./user.model');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const User = require('../models/user.model');
 
 dotenv.config();
 const app = express.Router();
@@ -10,7 +10,7 @@ let srckey = process.env.SRCTKY;
 
 app.post('/signup',async(req,res)=>{
       let {email,password,name,mob,age,gender} = req.body;
-      let user = await User.findOne({email});
+      let user = await UserModel.findOne({email});
       if(user){
         return res.send({message:`${email} is already registered`})
       }

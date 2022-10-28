@@ -1,17 +1,19 @@
-const express = require('express');
+const express = require('express')
+const dotenv = require('dotenv');
+const dbConnect = require('./src/config/db');
+const userRouter = require('./src/features/controllers/user.route');
 
-
+dotenv.config();
 const server = express();
 
+const PORT = process.env.PORT || 9090;
 
-server.get('/',(req,res)=>{
-    res.send('<h1>hello world</h1>');
-})
+server.use(express.urlencoded({ extended: true }))
+server.use(express.json())
 
-server.post("/signup",(req,res)=>[
-    
-])
+server.use("/", userRouter);
 
-server.listen(8080,()=>{
-    console.log('http://localhost:8080');
-})
+server.listen(PORT, async() =>{ 
+      await dbConnect();
+     console.log(`http://localhost:${PORT}`)
+    })
