@@ -1,6 +1,6 @@
 import { Auth_Login_Error, Auth_Login_Loading, Auth_Login_Success, Auth_Logout } from "./auth.types";
 
-let token = localStorage.getItem("token") || ""
+let token = localStorage.getItem("token") || "";
 let initState ={
     loading:false,
     error:false,
