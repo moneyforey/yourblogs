@@ -1,17 +1,21 @@
 const express = require('express')
 const dotenv = require('dotenv');
+const http = require('http');
+const {Server} = require('socket.io');
 const dbConnect = require('./src/config/db');
 const userRouter = require('./src/features/controllers/user.route');
 
 dotenv.config();
-const server = express();
+const app = express();
+const server = http.createServer(app);
+const io = Server(server);
 
 const PORT = process.env.PORT || 9090;
 
-server.use(express.urlencoded({ extended: true }))
-server.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
-server.use("/", userRouter);
+app.use("/", userRouter);
 
 server.listen(PORT, async() =>{ 
       await dbConnect();
