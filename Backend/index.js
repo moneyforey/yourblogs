@@ -8,7 +8,7 @@ const userRouter = require('./src/features/controllers/user.route');
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const io = Server(server);
+const io = new Server(server);
 
 const PORT = process.env.PORT || 9090;
 
